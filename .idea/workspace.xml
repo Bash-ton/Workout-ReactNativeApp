@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a6b4ea8-7087-4ab5-8bc5-5b0fbc6b5678" name="Default Changelist" comment="working redux (have not tested redux-firebase yet)">
+    <list default="true" id="0a6b4ea8-7087-4ab5-8bc5-5b0fbc6b5678" name="Default Changelist" comment="merged together redux and router">
+      <change afterPath="$PROJECT_DIR$/src/redux/actions/authActions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/reducers/authReducers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/firebaseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/firebaseConfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LogInPage/LogInPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogInPage/LogInPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +44,21 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -47,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1613393546026</updated>
       <workItem from="1613393548331" duration="12422000" />
-      <workItem from="1613464896687" duration="2404000" />
+      <workItem from="1613464896687" duration="11628000" />
     </task>
     <task id="LOCAL−00001" summary="working redux (have not tested redux-firebase yet)">
       <created>1613407728040</created>
@@ -61,7 +82,13 @@
       <option name="presentableId" value="LOCAL−00002" />
       <updated>1613466379148</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL−00003" summary="merged together redux and router">
+      <created>1613467457857</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1613467457857</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -81,6 +108,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="working redux (have not tested redux-firebase yet)" />
-    <option name="LAST_COMMIT_MESSAGE" value="working redux (have not tested redux-firebase yet)" />
+    <MESSAGE value="merged together redux and router" />
+    <option name="LAST_COMMIT_MESSAGE" value="merged together redux and router" />
   </component>
 </project>

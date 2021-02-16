@@ -2,19 +2,23 @@
 import {StatusBar} from 'expo-status-bar';
 import React from 'react';
 
-import {StyleSheet, Text, View, Button} from 'react-native';
-import {createFirestoreInstance} from "redux-firestore";
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { createFirestoreInstance } from "redux-firestore";
 import firebaseConfig from "./config/firebaseConfig";
+
 import firebase from "firebase/app";
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import TestingRedux from './src/components/Tests/TestingRedux';
-import {myStore} from './src/redux/index'
-import {ReactReduxFirebaseProvider} from "react-redux-firebase";
+import { myStore } from './src/redux/index'
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
 
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+
+//testing
+import LogInPage from "./src/components/LogInPage/LogInPage";
 
 
 const Stack = createStackNavigator();
@@ -28,7 +32,14 @@ const rrfProps = {
 };
 
 
-
+/*
+<NavigationContainer>
+                    <Stack.Navigator>
+                        <Stack.Screen name="Login" component={LogInPage}/>
+                        <Stack.Screen name="Test" component={TestView}/>
+                    </Stack.Navigator>
+                </NavigationContainer>
+ */
 
 const App = () => {
 
@@ -38,7 +49,7 @@ const App = () => {
 
                 <NavigationContainer>
                     <Stack.Navigator>
-                        <Stack.Screen name="Login" component={LoginView}/>
+                        <Stack.Screen name="Login" component={LogInPage}/>
                         <Stack.Screen name="Test" component={TestView}/>
                     </Stack.Navigator>
                 </NavigationContainer>
