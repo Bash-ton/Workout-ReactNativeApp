@@ -16,8 +16,10 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+import workoutTabs from './src/components/Navbar/navTabs.js';
 
-const Stack = createStackNavigator();
+
+const RootStack = createStackNavigator();
 
 
 const rrfProps = {
@@ -27,26 +29,19 @@ const rrfProps = {
     createFirestoreInstance
 };
 
-
-
-
 const App = () => {
-
-    return (
-        <Provider store={myStore}>
-            <ReactReduxFirebaseProvider {...rrfProps}>
-
-                <NavigationContainer>
-                    <Stack.Navigator>
-                        <Stack.Screen name="Login" component={LoginView}/>
-                        <Stack.Screen name="Test" component={TestView}/>
-                    </Stack.Navigator>
-                </NavigationContainer>
-
-            </ReactReduxFirebaseProvider>
-        </Provider>
-    );
-
+  return (
+    <Provider store={myStore}>
+        <ReactReduxFirebaseProvider {...rrfProps}>
+          <NavigationContainer>
+            <RootStack.Navigator>
+              <RootStack.Screen name="Workout App" component={workoutTabs} />
+              <RootStack.Screen name="Login" component={TestView} />
+            </RootStack.Navigator>
+        </NavigationContainer>
+      </ReactReduxFirebaseProvider>
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -57,14 +52,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
-
-const LoginView = ({navigation}) => {
-    return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Button title="Test page" onPress={() => navigation.navigate('Test')}/>
-        </View>
-    );
-};
 
 const TestView = ({navigation}) => {
     return (
