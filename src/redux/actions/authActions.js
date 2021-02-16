@@ -21,7 +21,6 @@ export const signOut = () => {
             dispatch({ type: 'SIGNOUT_SUCCESS' })
         }).catch((err)=> {
             dispatch({ type: 'SIGNOUT_ERROR', err})
-
         });
     }
 }

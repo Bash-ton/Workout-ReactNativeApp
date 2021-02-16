@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, Button, ScrollView, TextInput } from 'react-nat
 //redux hooks
 import {useDispatch, useSelector} from 'react-redux'
 
-
+import { AsyncStorage } from 'react-native';
 
 //Actions
 import { signIn } from "../../redux/actions/authActions";
@@ -37,12 +37,18 @@ const LogInPage = () => {
         setPassword(passwordInput)
     }
 
-    //life cycle methods
- /*   useEffect(() => {
+    //testing methods
+    const clearStorageTest = () => {
+        AsyncStorage.clear()
+    }
+
+  //life cycle methods
+/*      useEffect(() => {
         alert(loggedInStatus)
     }, [loggedInStatus])
 
-  */
+ */
+
 
 
 
@@ -64,6 +70,12 @@ const LogInPage = () => {
                     onPress={() => {dispatch(signIn({email: email, password: password}))}}
                     title="Log In"
                 />
+                {loggedInStatus ?<Text>You are logged in
+                    <Button
+                        onPress={() => {clearStorageTest()}}
+                        title="clear cache/storage"
+                    />
+                </Text>:<Text></Text>}
             </ScrollView>
         </View>
     );

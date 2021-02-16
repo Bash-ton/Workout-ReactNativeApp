@@ -2,10 +2,12 @@ import React from 'react';
 import {View, Button, Text} from 'react-native';
 import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
+import {useSelector} from "react-redux";
 
 const WorkoutStack = createStackNavigator();
 
 function WorkoutScreen() {
+
   return (
     <WorkoutStack.Navigator>
       <WorkoutStack.Screen name="workout" component={workoutView} />

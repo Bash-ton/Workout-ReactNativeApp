@@ -1,5 +1,4 @@
-//TODO remove testConstant and switch back to the commented out info to go back to app
-import {StatusBar} from 'expo-status-bar';
+
 import React from 'react';
 
 import { StyleSheet, Text, View, Button } from 'react-native';
@@ -8,25 +7,20 @@ import firebaseConfig from "./config/firebaseConfig";
 
 import firebase from "firebase/app";
 import { Provider } from 'react-redux';
-import TestingRedux from './src/components/Tests/TestingRedux';
-import { myStore } from './src/redux/index'
+import {myStore, persistor} from './src/redux/index'
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
 
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 
 
-//testing
-import LogInPage from "./src/components/LogInPage/LogInPage";
+//redux persist
+import { PersistGate } from 'redux-persist/integration/react'
 
+//route between components/functions/views
+import Router from "./src/components/Router/Router";
 
-import workoutTabs from './src/components/Navbar/navTabs.js';
-
-
-
-const RootStack = createStackNavigator();
 
 
 const rrfProps = {
@@ -36,20 +30,16 @@ const rrfProps = {
     createFirestoreInstance
 };
 
-
-
-
 const App = () => {
   return (
     <Provider store={myStore}>
+        <PersistGate loading={null} persistor={persistor}>
         <ReactReduxFirebaseProvider {...rrfProps}>
           <NavigationContainer>
-            <RootStack.Navigator>
-              <RootStack.Screen name="Workout App" component={workoutTabs} />
-              <RootStack.Screen name="Login" component={LogInPage} />
-            </RootStack.Navigator>
+            <Router/>
         </NavigationContainer>
       </ReactReduxFirebaseProvider>
+        </PersistGate>
     </Provider>
   );
 
