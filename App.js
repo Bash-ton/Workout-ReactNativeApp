@@ -2,7 +2,7 @@
 import {StatusBar} from 'expo-status-bar';
 import React from 'react';
 
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Button} from 'react-native';
 import {createFirestoreInstance} from "redux-firestore";
 import firebaseConfig from "./config/firebaseConfig";
 import firebase from "firebase/app";
@@ -16,6 +16,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+
 const Stack = createStackNavigator();
 
 
@@ -26,15 +27,9 @@ const rrfProps = {
     createFirestoreInstance
 };
 
-/*
 
-                <View style={styles.container}>
-                    <Text>Opn up App.js to start working on your app!</Text>
-                    <StatusBar style="auto"/>
-                </View>
- */
 
-//wrap content in provider and reactredux...
+
 const App = () => {
 
     return (
