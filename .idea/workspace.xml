@@ -4,9 +4,8 @@
     <list default="true" id="0a6b4ea8-7087-4ab5-8bc5-5b0fbc6b5678" name="Default Changelist" comment="working redux (have not tested redux-firebase yet)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Tests/TestingRedux.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Tests/TestingRedux.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/testActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/testActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/testReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/testReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +48,7 @@
       <option name="presentableId" value="Default" />
       <updated>1613393546026</updated>
       <workItem from="1613393548331" duration="12422000" />
-      <workItem from="1613464896687" duration="1467000" />
+      <workItem from="1613464896687" duration="2046000" />
     </task>
     <task id="LOCAL−00001" summary="working redux (have not tested redux-firebase yet)">
       <created>1613407728040</created>
@@ -57,7 +56,13 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1613407728040</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL−00002" summary="working redux (have not tested redux-firebase yet)">
+      <created>1613466379148</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1613466379148</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
