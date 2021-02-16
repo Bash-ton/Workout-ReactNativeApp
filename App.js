@@ -1,14 +1,14 @@
 //TODO remove testConstant and switch back to the commented out info to go back to app
 import {StatusBar} from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {createFirestoreInstance} from "redux-firestore";
+import { StyleSheet, Text, View } from 'react-native';
+import { createFirestoreInstance } from "redux-firestore";
 import firebaseConfig from "./config/firebaseConfig";
 import firebase from "firebase/app";
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import TestingRedux from './src/components/Tests/TestingRedux';
-import {myStore} from './src/redux/index'
-import {ReactReduxFirebaseProvider} from "react-redux-firebase";
+import { myStore } from './src/redux/index'
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
 
 const rrfProps = {
@@ -31,7 +31,9 @@ const App = () => {
     return (
         <Provider store={myStore}>
             <ReactReduxFirebaseProvider {...rrfProps}>
+
                 <TestingRedux/>
+
             </ReactReduxFirebaseProvider>
         </Provider>
     );

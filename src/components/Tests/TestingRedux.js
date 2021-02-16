@@ -1,6 +1,6 @@
 //TODO change buttons below to follow the one working button (PRESS ME)
 import React,{useEffect} from 'react';
-import {Text, View, Button} from 'react-native';
+import {Text, View, Button, StyleSheet} from 'react-native';
 
 //handle store listeners and actions
 import {useDispatch, useSelector} from 'react-redux'
@@ -16,17 +16,29 @@ const TestingRedux = () => {
     const isLoggedIn = useSelector(state => state.exampleReducer.status);
 
     return (
-        <View >
-            <Button
-                onPress={() => {dispatch(loggedInStatus())}}
-                title="Press Me"
-            />
+        <View style={styles.container}>
+
             {isLoggedIn ? <Text>User is logged in!</Text>: <Text>User is logged out!</Text>}
-            {isLoggedIn ? <Button ><Text>Log out</Text></Button>:<Button onPress={() => {loggedInStatus()}}><Text>Log in</Text></Button>}
+            {isLoggedIn?<Button
+                onPress={() => {
+                    dispatch(loggedInStatus(false))
+                }}
+                title="Log out"
+            />:<Button
+                onPress={() => {dispatch(loggedInStatus(true))}}
+                title="Log In"
+                />}
         </View>
-
     );
-
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
 
 export default TestingRedux;

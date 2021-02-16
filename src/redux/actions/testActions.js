@@ -1,6 +1,5 @@
-export const loggedInStatus = () => {
+export const loggedInStatus = (status) => {
     return (dispatch, getState, {getFirebase}) => {
-        dispatch({type: 'SIGNED_IN'})
-
+        dispatch({type: 'SIGNED_IN', item: status})
     };
 }

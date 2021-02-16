@@ -4,10 +4,9 @@ export const setLoggedInState = (state = false, action ) => {
 
         case 'SIGNED_IN':
             return {
-                status: !state
+                status: action.item
             };
         default:
-
             return state
     }
 
