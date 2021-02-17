@@ -8,10 +8,11 @@ import authReducers from "./authReducers";
 
 
 
+
 const combinedReducers = combineReducers({
     exampleReducer: setLoggedInState,
     auth: authReducers,
-    firebase: firebaseReducer
+    firebase: firebaseReducer,
 });
 
 export default combinedReducers;

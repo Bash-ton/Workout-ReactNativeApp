@@ -1,6 +1,6 @@
 //TODO change buttons below to follow the one working button (PRESS ME)
 import React,{useEffect} from 'react';
-import {Text, View, Button, StyleSheet} from 'react-native';
+import {Text, View, Button, StyleSheet, AsyncStorage} from 'react-native';
 
 //handle store listeners and actions
 import {useDispatch, useSelector} from 'react-redux'
@@ -14,6 +14,11 @@ const TestingRedux = () => {
     const dispatch = useDispatch();
     //hook on current state/store
     const isLoggedIn = useSelector(state => state.exampleReducer.status);
+
+    //call this to clear cashe. Then manually reload app
+    const clearStorageTest = () => {
+        AsyncStorage.clear()
+    }
 
     return (
         <View style={styles.container}>
