@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a6b4ea8-7087-4ab5-8bc5-5b0fbc6b5678" name="Default Changelist" comment="merged together redux and router">
-      <change afterPath="$PROJECT_DIR$/src/components/Router/Router.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SignInPage/SignUpPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/firebaseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/firebaseConfig.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/LogInPage/LogInPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogInPage/LogInPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/navTabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/navTabs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Router/Router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignInPage/SignInPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Router/AuthenticationRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignInPage/SignInPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignInPage/SignUpPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Tests/TestingRedux.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Tests/TestingRedux.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/WorkoutOverviewScreen/WorkoutOverviewScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/WorkoutOverviewScreen/WorkoutOverviewScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/authActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/testActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/testActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,15 +47,13 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -70,7 +68,8 @@
       <option name="presentableId" value="Default" />
       <updated>1613393546026</updated>
       <workItem from="1613393548331" duration="12422000" />
-      <workItem from="1613464896687" duration="21413000" />
+      <workItem from="1613464896687" duration="23587000" />
+      <workItem from="1613552721252" duration="7826000" />
     </task>
     <task id="LOCAL−00001" summary="working redux (have not tested redux-firebase yet)">
       <created>1613407728040</created>

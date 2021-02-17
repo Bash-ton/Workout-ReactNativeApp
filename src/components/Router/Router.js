@@ -10,7 +10,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 //login view
 import LogInPage from "../LogInPage/LogInPage";
-
+import AuthenticationRouter from "./AuthenticationRouter";
 //app view
 import workoutTabs from "../Navbar/navTabs";
 
@@ -26,7 +26,7 @@ const Router = () => {
     return (
         <RootStack.Navigator>
             {loggedInStatus ? <RootStack.Screen name="Workout App" component={workoutTabs}/>:
-                <RootStack.Screen name="Login" component={LogInPage} />}
+                <RootStack.Screen name="Authentication" component={AuthenticationRouter} />}
         </RootStack.Navigator>
     );
 }

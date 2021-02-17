@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Button, Text} from 'react-native';
+import {View, Button, Text, AsyncStorage} from 'react-native';
 import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from "react-redux";
@@ -18,10 +18,21 @@ function WorkoutScreen() {
 
 
 const workoutView = ({ navigation }) => {
+    //testing methods
+    const clearStorageTest = () => {
+        AsyncStorage.clear()
+    }
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text>Alla Pass!</Text>
          <Button title="Pass 1 övningar" onPress={() => navigation.navigate('exercise')}/>
+          <Button
+              onPress={() => {
+                  clearStorageTest()
+              }}
+              title="clear cache/storage"
+          />
       </View>
     );
 };

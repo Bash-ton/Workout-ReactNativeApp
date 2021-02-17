@@ -15,6 +15,7 @@ const TestingRedux = () => {
     //hook on current state/store
     const isLoggedIn = useSelector(state => state.exampleReducer.status);
 
+
     return (
         <View style={styles.container}>
 
