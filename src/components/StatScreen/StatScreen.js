@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 //testing svg
 import Svg, {G, Circle, Polyline, Line, Rect} from "react-native-svg";
+import {loggedInStatus} from "../../redux/actions/testActions";
 
 
 const StatStack = createStackNavigator();
@@ -48,7 +49,7 @@ const statsView = ({navigation}) => {
     //TODO TEST LISTEN FOR MAX VALUE IN REDUX MAYBE
 
     //test values (later take from redux)
-    const reduxTestAllValues = {mon: 10, tue: 12, wed: 0, thu: 5, fri: 0, sat: 23, sun: 12};
+    const reduxTestAllValues = {mon: 10, tue: 12, wed: 0, thu: 5, fri: 0, sat: 23, sun: 15};
     const graphType = "week"
 
     //const [max, setMax] = useState(0);
@@ -157,7 +158,7 @@ const statsView = ({navigation}) => {
 //TODO change the number of <Text/> depending on {graphType}
 //TODO Find correct align with text
     return (
-        <View class="graph" style={styles.container}>
+        <View class="graph">
             <ScrollView keyboardShouldPersistTaps="always">
                 <View style={styles.container}>
                     <ScrollView keyboardShouldPersistTaps="always">
@@ -168,12 +169,95 @@ const statsView = ({navigation}) => {
                             <G>
                                 <Polyline
                                     fill="none"
-                                    stroke="#0074d9"
+                                    stroke="#af58ff"
                                     strokeWidth="2"
                                     points={graphValues}
                                 />
                                 <G>
-
+                                    <Circle
+                                        onPress={() => {
+                                            alert("Max weight monday: " + [reduxTestAllValues.mon] + "kg")
+                                        }}
+                                        cx={xAxisVals.mon}
+                                        cy={yAxisVals.mon}
+                                        stroke="green"
+                                        strokeWidth={4}
+                                        r={10}
+                                        strokeOpacity={1}
+                                        fill="#af58ff"
+                                    />
+                                    <Circle
+                                        onPress={() => {
+                                            alert("Max weight tuesday: " + [reduxTestAllValues.tue] + "kg")
+                                        }}
+                                        cx={xAxisVals.tue}
+                                        cy={yAxisVals.tue}
+                                        stroke="green"
+                                        strokeWidth={4}
+                                        r={10}
+                                        strokeOpacity={1}
+                                        fill="#af58ff"
+                                    />
+                                    <Circle
+                                        onPress={() => {
+                                            alert("Max weight wednesday: " + [reduxTestAllValues.wed] + "kg")
+                                        }}
+                                        cx={xAxisVals.wed}
+                                        cy={yAxisVals.wed}
+                                        stroke="green"
+                                        strokeWidth={4}
+                                        r={10}
+                                        strokeOpacity={1}
+                                        fill="#af58ff"
+                                    />
+                                    <Circle
+                                        onPress={() => {
+                                            alert("Max weight thursday: " + [reduxTestAllValues.thu] + "kg")
+                                        }}
+                                        cx={xAxisVals.thu}
+                                        cy={yAxisVals.thu}
+                                        stroke="green"
+                                        strokeWidth={4}
+                                        r={10}
+                                        strokeOpacity={1}
+                                        fill="#af58ff"
+                                    />
+                                    <Circle
+                                        onPress={() => {
+                                            alert("Max weight friday: " + [reduxTestAllValues.fri] + "kg")
+                                        }}
+                                        cx={xAxisVals.fri}
+                                        cy={yAxisVals.fri}
+                                        stroke="green"
+                                        strokeWidth={4}
+                                        r={10}
+                                        strokeOpacity={1}
+                                        fill="#af58ff"
+                                    />
+                                    <Circle
+                                        onPress={() => {
+                                            alert("Max weight saturday: " + [reduxTestAllValues.sat] + "kg")
+                                        }}
+                                        cx={xAxisVals.sat}
+                                        cy={yAxisVals.sat}
+                                        stroke="green"
+                                        strokeWidth={4}
+                                        r={10}
+                                        strokeOpacity={1}
+                                        fill="#af58ff"
+                                    />
+                                    <Circle
+                                        onPress={() => {
+                                            alert("Max weight sunday: " + [reduxTestAllValues.sun] + "kg")
+                                        }}
+                                        cx={xAxisVals.sun}
+                                        cy={yAxisVals.sun}
+                                        stroke="green"
+                                        strokeWidth={4}
+                                        r={10}
+                                        strokeOpacity={1}
+                                        fill="#af58ff"
+                                    />
 
 
                                 </G>
@@ -183,12 +267,12 @@ const statsView = ({navigation}) => {
                         </Svg>
                     </ScrollView>
                 </View>
-                <View>
-                    <ScrollView keyboardShouldPersistTaps="always" style={styles.label} contentContainerStyle={{transform: [{rotate: "90deg"}]}}
-                               >
+                <View style={{backgroundColor: '#fff', height: windowWidth / 7,}}>
+                    <ScrollView keyboardShouldPersistTaps="always"
+                                contentContainerStyle={{transform: [{rotate: "90deg"}]}}
+                    >
 
                         <Text style={{
-
 
 
                             width: windowWidth / 7,
@@ -196,8 +280,7 @@ const statsView = ({navigation}) => {
 
 
                             position: "relative",
-                            paddingTop: (windowWidth / 7 - 20),
-
+                            paddingTop: (windowWidth / 7 - 16),
 
 
                         }}>
@@ -212,7 +295,7 @@ const statsView = ({navigation}) => {
 
 
                             position: "relative",
-                            paddingTop: (windowWidth / 7 - 20),
+                            paddingTop: (windowWidth / 7 - 16),
 
                         }}>
                             {" "}Sat
@@ -224,7 +307,7 @@ const statsView = ({navigation}) => {
 
 
                             position: "relative",
-                            paddingTop: (windowWidth / 7 - 20),
+                            paddingTop: (windowWidth / 7 - 16),
                         }}>
                             {" "}Fri
                         </Text>
@@ -235,7 +318,7 @@ const statsView = ({navigation}) => {
 
 
                             position: "relative",
-                            paddingTop: (windowWidth / 7 - 20),
+                            paddingTop: (windowWidth / 7 - 16),
                         }}
 
                         >
@@ -248,7 +331,7 @@ const statsView = ({navigation}) => {
 
 
                             position: "relative",
-                            paddingTop: (windowWidth / 7 -16),
+                            paddingTop: (windowWidth / 7 - 16),
                         }}>
                             {" "}Wed
                         </Text>
@@ -257,9 +340,9 @@ const statsView = ({navigation}) => {
                             width: windowWidth / 7,
                             height: windowWidth / 7,
 
-                            
+
                             position: "relative",
-                            paddingTop: (windowWidth / 7 - 20),
+                            paddingTop: (windowWidth / 7 - 16),
                         }}>
                             {" "}Tue
                         </Text>
@@ -270,7 +353,7 @@ const statsView = ({navigation}) => {
 
 
                             position: "relative",
-                            paddingTop: (windowWidth / 7 - 20),
+                            paddingTop: (windowWidth / 7 - 16),
 
 
                         }}>
@@ -278,6 +361,118 @@ const statsView = ({navigation}) => {
                         </Text>
 
 
+                    </ScrollView>
+                </View>
+                <View>
+                    <ScrollView keyboardShouldPersistTaps="always" style={{
+                        position: "relative",
+                        backgroundColor: "#af58ff",
+                        height: windowWidth * 0.7,
+                        borderWidth: 3,
+                        flexDirection:"row",
+
+                    }} >
+                        <Text
+                        >
+                            Weight:
+                        </Text>
+                        <View >
+                            <ScrollView keyboardShouldPersistTaps="always" contentContainerStyle={{flexDirection: 'row'}}>
+
+                                <Text
+                                    style={{  marginRight:15  }}
+                                >
+                                    Current max{"\n"}{max}
+                                </Text>
+                                <Text
+                                    style={{  marginRight:15  }}
+                                >
+                                    Next target max{"\n"}"20"
+                                </Text>
+                                <Text
+                                >
+                                    Goal max{"\n"}"49"
+                                </Text>
+                            </ScrollView>
+                        </View>
+                        <Text
+                        >
+                            Reps:
+                        </Text>
+                        <View>
+                            <ScrollView keyboardShouldPersistTaps="always" contentContainerStyle={{flexDirection: 'row'}}>
+
+                        <Text
+                            style={{  marginRight:15  }}
+                        >
+                            Current max{"\n"}"12"
+                        </Text>
+                        <Text
+                            style={{  marginRight:15  }}
+                        >
+                            Next target max{"\n"}"20"
+                        </Text>
+                        <Text
+                        >
+                            Goal max{"\n"}"49"
+                        </Text>
+                            </ScrollView>
+                        </View>
+                        <Text
+                        >
+                            Cardio:
+                        </Text>
+                        <View>
+                            <ScrollView keyboardShouldPersistTaps="always" contentContainerStyle={{flexDirection: 'row'}}>
+
+                                <Text
+                                    style={{  marginRight:15  }}
+                                >
+                                    Current max speed{"\n"}"-"
+                                </Text>
+                                <Text
+                                    style={{  marginRight:15  }}
+                                >
+                                    Next target speed{"\n"}"-"
+                                </Text>
+                                <Text
+                                >
+                                    Goal speed{"\n"}"-"
+                                </Text>
+                            </ScrollView>
+                        </View>
+                        <View>
+                            <ScrollView keyboardShouldPersistTaps="always" contentContainerStyle={{flexDirection: 'row'}}>
+
+                                <Text
+                                    style={{  marginRight:15  }}
+                                >
+                                    Current max dist.{"\n"}"-"
+                                </Text>
+                                <Text
+                                    style={{  marginRight:15  }}
+                                >
+                                    Next target dist.{"\n"}"-"
+                                </Text>
+                                <Text
+                                >
+                                    Goal dist.{"\n"}"-"
+                                </Text>
+                            </ScrollView>
+                        </View>
+
+
+                    </ScrollView>
+                </View>
+                <View>
+                    <ScrollView keyboardShouldPersistTaps="always">
+                        <Button
+                            onPress={() => {
+                                alert("drop down menu")
+                            }}
+                            title="Change exercise"
+                            color="green"
+                        />
                     </ScrollView>
                 </View>
 
@@ -294,7 +489,7 @@ const graphHeight = (windowHeight / 4);
 const styles = StyleSheet.create({
 //contentContainerStyle={{flexDirection: 'row'}}
     mainContainer: {
-        width: windowWidth/2
+        width: windowWidth / 2
     },
 
     container: {
@@ -306,7 +501,6 @@ const styles = StyleSheet.create({
     },
     label: {
         flex: 1,
-
 
 
     }
