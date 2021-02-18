@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a6b4ea8-7087-4ab5-8bc5-5b0fbc6b5678" name="Default Changelist" comment="merged together redux and router">
-      <change afterPath="$PROJECT_DIR$/src/components/Router/Router.js" afterDir="false" />
+    <list default="true" id="0a6b4ea8-7087-4ab5-8bc5-5b0fbc6b5678" name="Default Changelist" comment="signup with email verification done, added so that admin accounts does not need email verification">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/firebaseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/firebaseConfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LogInPage/LogInPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogInPage/LogInPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/navTabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/navTabs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/WorkoutOverviewScreen/WorkoutOverviewScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/WorkoutOverviewScreen/WorkoutOverviewScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/authActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/StatScreen/StatScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/StatScreen/StatScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +16,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -44,22 +38,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -70,7 +50,10 @@
       <option name="presentableId" value="Default" />
       <updated>1613393546026</updated>
       <workItem from="1613393548331" duration="12422000" />
-      <workItem from="1613464896687" duration="21413000" />
+      <workItem from="1613464896687" duration="23587000" />
+      <workItem from="1613552721252" duration="8182000" />
+      <workItem from="1613568975699" duration="14839000" />
+      <workItem from="1613638860290" duration="11623000" />
     </task>
     <task id="LOCAL−00001" summary="working redux (have not tested redux-firebase yet)">
       <created>1613407728040</created>
@@ -90,7 +73,13 @@
       <option name="presentableId" value="LOCAL−00003" />
       <updated>1613467457857</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL−00004" summary="signup with email verification done, added so that admin accounts does not need email verification">
+      <created>1613563847913</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1613563847913</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +100,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="working redux (have not tested redux-firebase yet)" />
     <MESSAGE value="merged together redux and router" />
-    <option name="LAST_COMMIT_MESSAGE" value="merged together redux and router" />
+    <MESSAGE value="signup with email verification done, added so that admin accounts does not need email verification" />
+    <option name="LAST_COMMIT_MESSAGE" value="signup with email verification done, added so that admin accounts does not need email verification" />
   </component>
 </project>

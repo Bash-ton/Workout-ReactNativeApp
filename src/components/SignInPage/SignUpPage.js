@@ -1,23 +1,14 @@
-//TODO make this look like WorkoutOverviewScreens (to able routing to SingUpPage)
-
-import React, {useState, useEffect} from "react";
-import {StyleSheet, Text, View, Button, ScrollView, TextInput} from 'react-native';
-
-//redux hooks
-import {useDispatch, useSelector} from 'react-redux';
-
-import {AsyncStorage} from 'react-native';
-
-//Actions
-import {signIn} from "../../redux/actions/authActions";
+import React, { useState } from 'react'
+import { Button, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import {useDispatch, useSelector} from "react-redux";
 
 
-const LogInPage = ({ navigation }) => {
+import { signUp } from "../../redux/actions/authActions";
+
+
+const SignUpPage = ({ navigation }) => {
     //dispatch
     const dispatch = useDispatch();
-
-    //redux hooks
-    const loggedInStatus = useSelector(state => state.auth.isLogged);
 
 
     //local props
@@ -33,20 +24,6 @@ const LogInPage = ({ navigation }) => {
     const getPassword = (passwordInput) => {
         setPassword(passwordInput)
     }
-
-    //testing methods
-    const clearStorageTest = () => {
-        AsyncStorage.clear()
-    }
-
-
-
-    //life cycle methods
-  /*  useEffect(() => {
-
-    }, [loggedInStatus])
-
-   */
 
 
     return (
@@ -69,24 +46,17 @@ const LogInPage = ({ navigation }) => {
                 />
                 <Button
                     onPress={() => {
-                        dispatch(signIn({email: email, password: password}))
+                        dispatch(signUp({email: email, password: password}))
                     }}
-                    title="Log In"
+                    title="Sign Up"
                 />
-                {loggedInStatus ? <Text>You are logged in
-                    <Button
-                        onPress={() => {
-                            clearStorageTest()
-                        }}
-                        title="clear cache/storage"
-                    />
-                </Text> : <Text></Text>}
+                <Text style={{color: "red"}} onPress={() => navigation.navigate('Log in')}>{"\n"}Log in</Text>
             </ScrollView>
         </View>
     );
-}
+};
 
-export default LogInPage;
+export default SignUpPage;
 
 //TODO REMOVE AND ADD PROPER CSS FILE INSTEAD
 const styles = StyleSheet.create({
