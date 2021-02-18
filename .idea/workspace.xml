@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0a6b4ea8-7087-4ab5-8bc5-5b0fbc6b5678" name="Default Changelist" comment="signup with email verification done, added so that admin accounts does not need email verification">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/StatScreen/StatScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/StatScreen/StatScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +51,7 @@
       <workItem from="1613464896687" duration="23587000" />
       <workItem from="1613552721252" duration="8182000" />
       <workItem from="1613568975699" duration="14839000" />
-      <workItem from="1613638860290" duration="11623000" />
+      <workItem from="1613638860290" duration="16921000" />
     </task>
     <task id="LOCAL−00001" summary="working redux (have not tested redux-firebase yet)">
       <created>1613407728040</created>
