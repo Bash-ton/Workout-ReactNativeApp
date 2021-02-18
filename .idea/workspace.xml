@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/StatScreen/StatScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/StatScreen/StatScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/WorkoutOverviewScreen/WorkoutOverviewScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/WorkoutOverviewScreen/WorkoutOverviewScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +38,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -54,6 +55,7 @@
       <workItem from="1613552721252" duration="8182000" />
       <workItem from="1613568975699" duration="14839000" />
       <workItem from="1613638860290" duration="11623000" />
+      <workItem from="1613660611042" duration="926000" />
     </task>
     <task id="LOCAL−00001" summary="working redux (have not tested redux-firebase yet)">
       <created>1613407728040</created>

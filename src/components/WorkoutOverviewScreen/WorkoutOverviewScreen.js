@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {SafeAreaView,StatusBar,StyleSheet,View, Button, Text, TouchableOpacity} from 'react-native';
-import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
 import CheckBox from '@react-native-community/checkbox';
 import {useSelector} from "react-redux";
@@ -90,7 +89,7 @@ const exerciseView = ({ navigation }) => {
   
   const [isSelected, setSelection] = useState(false);
 
-  const [test1, setSelectedId] = useState(false);
+
   
    
   
@@ -101,7 +100,7 @@ const exerciseView = ({ navigation }) => {
       <View style={styles.container}  >
       <ScrollView keyboardShouldPersistTaps="always"  contentContainerStyle={{flexDirection: 'row', flexWrap: 'wrap'}}>
         <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-      <CheckBox value={isSelected ||test1} onValueChange={test1 === false ? setSelectedId():setSelectedId()} style={{ transform: [{ scaleX: 3 }, { scaleY: 3}] }}/>
+      <CheckBox value={isSelected} style={{ transform: [{ scaleX: 3 }, { scaleY: 3}] }}/>
        </View>
       <Item item={item} 
       onPress={() => navigation.navigate('workout')} />
