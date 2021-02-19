@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {View, Button, Text, ScrollView, TextInput,  Alert, Modal, StyleSheet, Pressable, SafeAreaView, TouchableOpacity, FlatList, StatusBar } from 'react-native'; 
+import {View, Button, Text, ScrollView, TextInput,  Alert, Modal, StyleSheet, Pressable, SafeAreaView, TouchableOpacity, FlatList, StatusBar, AsyncStorage} from 'react-native'; 
 import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
-import {useSelector} from "react-redux";
 import { getFirestore } from 'redux-firestore';
+import {useDispatch, useSelector} from 'react-redux';
+import {addSchedule} from "../../redux/actions/scheduleActions";
 
 /*************************** TESTING ******************************************/
 var schedulesArray = [];
@@ -29,19 +30,32 @@ const Item = ({ item, onPress, style }) => (
 );
 
 const ScheduleView = ({ navigation }) => {
-  const firebase = getFirestore();
-  const [schedules, setSchedules] = useState(schedulesArray);
+  const dispatch = useDispatch();
+  const schedule = useSelector(state => state.schedule);
+  // For testing purposes
+/*const clearStorageTest = () => {
+    AsyncStorage.clear()
+};clearStorageTest();*/
+
+  const [schedules, setSchedules] = useState(schedule);
+  useEffect(() => {
+    return setSchedules(schedule);
+  }, [schedule])
+
   const [currentSchedule, setCurrentSchedule] = useState(currentSchedule);
-  const addSchedule = (name) => {
+
+  const createSchedule = (name) => {
     if(!name) console.log('error');
-    else setSchedules([...schedules, {title: name}]);
+    else{
+      dispatch(addSchedule({title: name}));
+    } 
   }
 
   const renderItem = ({ item }) => {
     return (
       <Item
         item={item}
-        onPress={() => navigation.navigate('Routines')}
+        onPress={() => navigation.navigate('Routines',{schedule: item.id})}
       />
     );
   };
@@ -57,7 +71,7 @@ const ScheduleView = ({ navigation }) => {
         />
       </SafeAreaView>
       
-      <CreateScheduleModal addSchedule = {addSchedule}/> 
+      <CreateScheduleModal addSchedule = {createSchedule}/> 
     </View>
   );
 };
@@ -65,11 +79,11 @@ const ScheduleView = ({ navigation }) => {
 const routineView = ({ route, navigation }) => {
   const [routines, setRoutine] = useState([]);
   //const {routine} = route.params;
-
   const addRoutine = ({name, exercises}) => {
     setRoutine([...routines, {title: name, exercises: exercises}]);
   }
-
+  const {schedule} = route.params;
+  console.log(schedule);
   const renderItem = ({ item }) => {
     return (
       <Item
