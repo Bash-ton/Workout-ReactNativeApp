@@ -1,5 +1,5 @@
 var uuid = require("uuid");
-export const addSchedule1 = ({title}) => {
+export const addSchedule = ({title}) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase();
         const userID = firebase.auth().currentUser.uid;

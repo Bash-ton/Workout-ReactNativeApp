@@ -88,7 +88,7 @@ const routineView = ({ route, navigation }) => {
     return (
       <Item
         item={item}
-        onPress={() => console.log("ja du")}
+        onPress={() => console.log("ja du" + schedule)}
       />
     );
   };
