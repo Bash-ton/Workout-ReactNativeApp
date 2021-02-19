@@ -6,7 +6,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 //testing svg
 import Svg, {G, Circle, Polyline, Line, Rect} from "react-native-svg";
 import {loggedInStatus} from "../../redux/actions/testActions";
-
+import {useDispatch, useSelector} from "react-redux";
+import {readCurrentWeek} from "../../redux/actions/statsActions";
 
 const StatStack = createStackNavigator();
 
@@ -45,32 +46,18 @@ function StatScreen() {
  *
  * week starts with values from DB through redux: {mon: 0, tue: 0, wed: 0, thu: 0, fri: 0, sat: 0, sun: 0}
  */
-const statsView = ({navigation}) => {
-    //TODO TEST LISTEN FOR MAX VALUE IN REDUX MAYBE
+const statsView = ({ navigation }) => {
 
-    //test values (later take from redux)
-    const reduxTestAllValues = {mon: 10, tue: 12, wed: 0, thu: 5, fri: 0, sat: 23, sun: 15};
+
+
+
+    const statsState = useSelector(state => state.statReducer.stats)
     const graphType = "week"
+    const exerciseName = "excersiseName1";
+    const max = useSelector(state => state.statReducer.stats[8].currentLocalMax)
 
-    //const [max, setMax] = useState(0);
-    //TODO ADD FUNCTIONALITY FOR MONTH AND YEAR AS WELL (ex change 7, change arr in accordance to {graphType})
-    //return only value. date does not matter
-    const getMaxYVal = () => {
-        let localMax = reduxTestAllValues.mon
-        let arr = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-        let i = 0;
-        let l = 0;
-        while (i < 7) {
-            if (localMax < reduxTestAllValues[arr[i]]) {
-                localMax = reduxTestAllValues[arr[i]]
-                l = i;
-            }
-            i++;
-        }
-        return localMax;
+    const dispatch = useDispatch();
 
-    }
-    const max = getMaxYVal();
 
 
     const windowWidth = Dimensions.get('window').width;
@@ -110,27 +97,19 @@ const statsView = ({navigation}) => {
                 break
         }
     }
-    //TODO CHANGE DEFAULT VALUE TO ZERO IF YOU CAN ABLE RE RENDERING
-    const [yAxisVals, setYAxisVals] = useState({
-        mon: ((graphHeight - ((reduxTestAllValues.mon / max) * (0.9 * graphHeight)))),
-        tue: (graphHeight - ((reduxTestAllValues.tue / max) * (0.9 * graphHeight))),
-        wed: (graphHeight - ((reduxTestAllValues.wed / max) * (0.9 * graphHeight))),
-        thu: (graphHeight - ((reduxTestAllValues.thu / max) * (0.9 * graphHeight))),
-        fri: (graphHeight - ((reduxTestAllValues.fri / max) * (0.9 * graphHeight))),
-        sat: (graphHeight - ((reduxTestAllValues.sat / max) * (0.9 * graphHeight))),
-        sun: (graphHeight - ((reduxTestAllValues.sun / max) * (0.9 * graphHeight)))
-    });
+
+    const [yAxisVals, setYAxisVals] = useState({});
     const getYAxisValues = () => {
         switch (graphType) {
             case "week":
                 setYAxisVals({
-                    mon: ((graphHeight - ((reduxTestAllValues.mon / max) * (0.9 * graphHeight)))),
-                    tue: (graphHeight - ((reduxTestAllValues.tue / max) * (0.9 * graphHeight))),
-                    wed: (graphHeight - ((reduxTestAllValues.wed / max) * (0.9 * graphHeight))),
-                    thu: (graphHeight - ((reduxTestAllValues.thu / max) * (0.9 * graphHeight))),
-                    fri: (graphHeight - ((reduxTestAllValues.fri / max) * (0.9 * graphHeight))),
-                    sat: (graphHeight - ((reduxTestAllValues.sat / max) * (0.9 * graphHeight))),
-                    sun: (graphHeight - ((reduxTestAllValues.sun / max) * (0.9 * graphHeight)))
+                    mon: ((graphHeight - ((statsState[1].mon / max) * (0.9 * graphHeight)))),
+                    tue: (graphHeight - ((statsState[2].tue / max) * (0.9 * graphHeight))),
+                    wed: (graphHeight - ((statsState[3].wed / max) * (0.9 * graphHeight))),
+                    thu: (graphHeight - ((statsState[4].thu / max) * (0.9 * graphHeight))),
+                    fri: (graphHeight - ((statsState[5].fri / max) * (0.9 * graphHeight))),
+                    sat: (graphHeight - ((statsState[6].sat / max) * (0.9 * graphHeight))),
+                    sun: (graphHeight - ((statsState[7].sun / max) * (0.9 * graphHeight)))
                 })
                 break
             default:
@@ -150,16 +129,32 @@ const statsView = ({navigation}) => {
 
     //lifecycle methods
     useEffect(() => {
+        dispatch(readCurrentWeek(exerciseName));
+
         getXAxisValues();
         getYAxisValues();
         getGraphValuesMapped();
+        console.log("render")
+
     }, [])
 
-//TODO change the number of <Text/> depending on {graphType}
-//TODO Find correct align with text
+
+    useEffect(() => {
+        dispatch(readCurrentWeek(exerciseName));
+        console.log("rerender")
+
+        getXAxisValues();
+        getYAxisValues();
+        getGraphValuesMapped();
+    }, [JSON.stringify(statsState) , JSON.stringify(yAxisVals) ,JSON.stringify(xAxisVals)])
+
+
+
+
     return (
         <View class="graph">
-            <ScrollView keyboardShouldPersistTaps="always">
+
+            {statsState[1] ? <ScrollView keyboardShouldPersistTaps="always">
                 <View style={styles.container}>
                     <ScrollView keyboardShouldPersistTaps="always">
                         <Svg
@@ -176,7 +171,7 @@ const statsView = ({navigation}) => {
                                 <G>
                                     <Circle
                                         onPress={() => {
-                                            alert("Max weight monday: " + [reduxTestAllValues.mon] + "kg")
+                                            alert("Max weight monday: " + [statsState[1].mon] + "kg")
                                         }}
                                         cx={xAxisVals.mon}
                                         cy={yAxisVals.mon}
@@ -188,7 +183,7 @@ const statsView = ({navigation}) => {
                                     />
                                     <Circle
                                         onPress={() => {
-                                            alert("Max weight tuesday: " + [reduxTestAllValues.tue] + "kg")
+                                            alert("Max weight tuesday: " + [statsState[2].tue] + "kg")
                                         }}
                                         cx={xAxisVals.tue}
                                         cy={yAxisVals.tue}
@@ -200,7 +195,7 @@ const statsView = ({navigation}) => {
                                     />
                                     <Circle
                                         onPress={() => {
-                                            alert("Max weight wednesday: " + [reduxTestAllValues.wed] + "kg")
+                                            alert("Max weight wednesday: " + [statsState[3].wed] + "kg")
                                         }}
                                         cx={xAxisVals.wed}
                                         cy={yAxisVals.wed}
@@ -212,7 +207,7 @@ const statsView = ({navigation}) => {
                                     />
                                     <Circle
                                         onPress={() => {
-                                            alert("Max weight thursday: " + [reduxTestAllValues.thu] + "kg")
+                                            alert("Max weight thursday: " + [statsState[4].thu] + "kg")
                                         }}
                                         cx={xAxisVals.thu}
                                         cy={yAxisVals.thu}
@@ -224,7 +219,7 @@ const statsView = ({navigation}) => {
                                     />
                                     <Circle
                                         onPress={() => {
-                                            alert("Max weight friday: " + [reduxTestAllValues.fri] + "kg")
+                                            alert("Max weight friday: " + [statsState[5].fri] + "kg")
                                         }}
                                         cx={xAxisVals.fri}
                                         cy={yAxisVals.fri}
@@ -236,7 +231,7 @@ const statsView = ({navigation}) => {
                                     />
                                     <Circle
                                         onPress={() => {
-                                            alert("Max weight saturday: " + [reduxTestAllValues.sat] + "kg")
+                                            alert("Max weight saturday: " + [statsState[6].sat] + "kg")
                                         }}
                                         cx={xAxisVals.sat}
                                         cy={yAxisVals.sat}
@@ -248,7 +243,7 @@ const statsView = ({navigation}) => {
                                     />
                                     <Circle
                                         onPress={() => {
-                                            alert("Max weight sunday: " + [reduxTestAllValues.sun] + "kg")
+                                            alert("Max weight sunday: " + [statsState[7].sun] + "kg")
                                         }}
                                         cx={xAxisVals.sun}
                                         cy={yAxisVals.sun}
@@ -369,23 +364,24 @@ const statsView = ({navigation}) => {
                         backgroundColor: "#af58ff",
                         height: windowWidth * 0.7,
                         borderWidth: 3,
-                        flexDirection:"row",
+                        flexDirection: "row",
 
-                    }} >
+                    }}>
                         <Text
                         >
                             Weight:
                         </Text>
-                        <View >
-                            <ScrollView keyboardShouldPersistTaps="always" contentContainerStyle={{flexDirection: 'row'}}>
+                        <View>
+                            <ScrollView keyboardShouldPersistTaps="always"
+                                        contentContainerStyle={{flexDirection: 'row'}}>
 
                                 <Text
-                                    style={{  marginRight:15  }}
+                                    style={{marginRight: 15}}
                                 >
                                     Current max{"\n"}{max}
                                 </Text>
                                 <Text
-                                    style={{  marginRight:15  }}
+                                    style={{marginRight: 15}}
                                 >
                                     Next target max{"\n"}"20"
                                 </Text>
@@ -400,22 +396,23 @@ const statsView = ({navigation}) => {
                             Reps:
                         </Text>
                         <View>
-                            <ScrollView keyboardShouldPersistTaps="always" contentContainerStyle={{flexDirection: 'row'}}>
+                            <ScrollView keyboardShouldPersistTaps="always"
+                                        contentContainerStyle={{flexDirection: 'row'}}>
 
-                        <Text
-                            style={{  marginRight:15  }}
-                        >
-                            Current max{"\n"}"12"
-                        </Text>
-                        <Text
-                            style={{  marginRight:15  }}
-                        >
-                            Next target max{"\n"}"20"
-                        </Text>
-                        <Text
-                        >
-                            Goal max{"\n"}"49"
-                        </Text>
+                                <Text
+                                    style={{marginRight: 15}}
+                                >
+                                    Current max{"\n"}"12"
+                                </Text>
+                                <Text
+                                    style={{marginRight: 15}}
+                                >
+                                    Next target max{"\n"}"20"
+                                </Text>
+                                <Text
+                                >
+                                    Goal max{"\n"}"49"
+                                </Text>
                             </ScrollView>
                         </View>
                         <Text
@@ -423,15 +420,16 @@ const statsView = ({navigation}) => {
                             Cardio:
                         </Text>
                         <View>
-                            <ScrollView keyboardShouldPersistTaps="always" contentContainerStyle={{flexDirection: 'row'}}>
+                            <ScrollView keyboardShouldPersistTaps="always"
+                                        contentContainerStyle={{flexDirection: 'row'}}>
 
                                 <Text
-                                    style={{  marginRight:15  }}
+                                    style={{marginRight: 15}}
                                 >
                                     Current max speed{"\n"}"-"
                                 </Text>
                                 <Text
-                                    style={{  marginRight:15  }}
+                                    style={{marginRight: 15}}
                                 >
                                     Next target speed{"\n"}"-"
                                 </Text>
@@ -442,15 +440,16 @@ const statsView = ({navigation}) => {
                             </ScrollView>
                         </View>
                         <View>
-                            <ScrollView keyboardShouldPersistTaps="always" contentContainerStyle={{flexDirection: 'row'}}>
+                            <ScrollView keyboardShouldPersistTaps="always"
+                                        contentContainerStyle={{flexDirection: 'row'}}>
 
                                 <Text
-                                    style={{  marginRight:15  }}
+                                    style={{marginRight: 15}}
                                 >
                                     Current max dist.{"\n"}"-"
                                 </Text>
                                 <Text
-                                    style={{  marginRight:15  }}
+                                    style={{marginRight: 15}}
                                 >
                                     Next target dist.{"\n"}"-"
                                 </Text>
@@ -476,7 +475,7 @@ const statsView = ({navigation}) => {
                     </ScrollView>
                 </View>
 
-            </ScrollView>
+            </ScrollView> : <Text>"</Text>}
         </View>
     );
 };
@@ -507,3 +506,4 @@ const styles = StyleSheet.create({
 });
 
 export default StatScreen;
+
