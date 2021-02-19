@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {View, Button, Text, StyleSheet, Dimensions, ScrollView} from 'react-native';
+import {View, Button, Text, StyleSheet, Dimensions, ScrollView, Picker} from 'react-native';
 import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
 
-//testing svg
-import Svg, {G, Circle, Polyline, Line, Rect} from "react-native-svg";
-import {loggedInStatus} from "../../redux/actions/testActions";
+// svg
+import Svg, {G, Circle, Polyline} from "react-native-svg";
+//redux
 import {useDispatch, useSelector} from "react-redux";
 import {readCurrentWeek} from "../../redux/actions/statsActions";
 
+import PickerItem from "react-native-web/dist/exports/Picker/PickerItem";
+//navigation
 const StatStack = createStackNavigator();
 
 function StatScreen() {
@@ -49,17 +51,50 @@ function StatScreen() {
 const statsView = ({ navigation }) => {
 
 
+    //change to real reducer later
+    const pass = [
+        {
+            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+            title: 'Pass 1',
+        },
+        {
+            id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+            title: 'Pass 2',
+        },
+        {
+            id: '58694a0f-3da1-471f-bd96-145571e29d72',
+            title: 'Pass 3',
+        },
+        {
+            id: '58694a0f-3da1-471f-bd96-145571e29d72',
+            title: 'Pass 4',
+        },
+        {
+            id: '58694a0f-3da1-471f-bd96-145571e29d72',
+            title: 'Pass 5',
+        },
+        {
+            id: '58694a0f-3da1-471f-bd96-145571e29d72',
+            title: 'Pass 6',
+        },
+        {
+            id: '58694a0f-3da1-471f-bd96-145571e29d72',
+            title: 'Pass 7',
+        },
+    ];
+    const passNumbers = pass.length;
+
 
 
     const statsState = useSelector(state => state.statReducer.stats)
     const graphType = "week"
-    const exerciseName = "excersiseName1";
-    const max = useSelector(state => state.statReducer.stats[8].currentLocalMax)
-
+    //const exerciseName = "excersiseName1";
+    const [exerciseName, setExName] = useState("excersiseName1");
+    //const max = useSelector(state => state.statReducer.stats[8].currentLocalMax)
+    let max = statsState[8].currentLocalMax
     const dispatch = useDispatch();
-
-
-
+//excersiseName1
+//exerciseName2
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
 
@@ -127,6 +162,8 @@ const statsView = ({ navigation }) => {
         }
     }
 
+
+
     //lifecycle methods
     useEffect(() => {
         dispatch(readCurrentWeek(exerciseName));
@@ -134,27 +171,38 @@ const statsView = ({ navigation }) => {
         getXAxisValues();
         getYAxisValues();
         getGraphValuesMapped();
-        console.log("render")
+        max = statsState[8].currentLocalMax;
+
 
     }, [])
 
 
     useEffect(() => {
         dispatch(readCurrentWeek(exerciseName));
-        console.log("rerender")
 
+        max = statsState[8].currentLocalMax;
         getXAxisValues();
         getYAxisValues();
         getGraphValuesMapped();
-    }, [JSON.stringify(statsState) , JSON.stringify(yAxisVals) ,JSON.stringify(xAxisVals)])
+    }, [JSON.stringify(statsState), JSON.stringify(yAxisVals), JSON.stringify(xAxisVals) , exerciseName, max])
 
 
-
-
+    const [pickerVal, setPickerVal] = useState("ex1");
     return (
         <View class="graph">
 
             {statsState[1] ? <ScrollView keyboardShouldPersistTaps="always">
+                <View>
+                    <ScrollView keyboardShouldPersistTaps="always">
+                        <Picker
+                            selectedValue={pickerVal}
+                            onValueChange={(itemValue, itemIndex, itemLabel)=>{setPickerVal(itemValue) , setExName(itemValue)  }}
+                        >
+                            <Picker.Item label="exercise 1" value="excersiseName1"/>
+                            <Picker.Item label="exercise 2" value="exerciseName2" />
+                        </Picker>
+                    </ScrollView>
+                </View>
                 <View style={styles.container}>
                     <ScrollView keyboardShouldPersistTaps="always">
                         <Svg
@@ -463,17 +511,7 @@ const statsView = ({ navigation }) => {
 
                     </ScrollView>
                 </View>
-                <View>
-                    <ScrollView keyboardShouldPersistTaps="always">
-                        <Button
-                            onPress={() => {
-                                alert("drop down menu")
-                            }}
-                            title="Change exercise"
-                            color="green"
-                        />
-                    </ScrollView>
-                </View>
+
 
             </ScrollView> : <Text>"</Text>}
         </View>
@@ -507,3 +545,12 @@ const styles = StyleSheet.create({
 
 export default StatScreen;
 
+/*
+<Button
+                            onPress={() => {
+                                alert("drop down menu")
+                            }}
+                            title="Change exercise"
+                            color="green"
+                        />
+ */

@@ -12,28 +12,8 @@ export const readCurrentWeek = (exerciseName) => {
         let result = [];
 
 
-        /*       firestore.collection("Statistics/" + userID + "/" + exerciseName).doc(currentDate).get().then((res) => {
-                   console.log(res.data())
-                   if(res.exists){
-                       result.add({currentMax: res.data().currentMax})
-                       //read tempData from DB
-                       firestore.collection("Statistics/" + userID + "/" + exerciseName).doc("tempData").get().then((res) => {
-                           result.add({mon: res.data().mon}, {tue: res.data().tue}, {wed: res.data().wed}, {thu: res.data().thu}, {fri: res.data().fri},{ sat: res.data().sat}, {sun: res.data().sun})
-                       })
-
-                      // dispatch({ type: "READ_EXERCISE_STATS", actions:result })
-
-                   }else{//create empty placement for these 2 docs
-                       //return zeroes
-                       result.add({mon: 0}, {tue: 0}, {wed: 0}, {thu: 0}, {fri: 0},{ sat: 0}, {sun: 0})
-                     //  dispatch({ type: "READ_EXERCISE_STATS", actions:result })
-                   }
-
-
-               })
-
-         */
         firestore.collection("Statistics/" + userID + "/" + exerciseName).doc(currentDate).onSnapshot((res) => {
+
 
             if (res.exists) {
                 result.push({currentMax: res.data().currentMax})
@@ -51,8 +31,6 @@ export const readCurrentWeek = (exerciseName) => {
                         {currentLocalMax : res.data().currentLocalMax}
                     )
 
-                  //  console.log(result[1].mon)
-                   // console.log(result)
                     dispatch({ type: "READ_EXERCISE_STATS", item:result })
                 })
 
@@ -65,14 +43,6 @@ export const readCurrentWeek = (exerciseName) => {
 
 
         })
-
-
-        /*  firestore.collection("Statistics/" + userID + "/" + "excersiseName1").doc("2021-2").update({
-              test: "test"
-          })
-
-         */
-
 
     }
 }
