@@ -4,7 +4,9 @@ import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
 import { getFirestore } from 'redux-firestore';
 import {useDispatch, useSelector} from 'react-redux';
-import {addSchedule} from "../../redux/actions/scheduleActions";
+import {addSchedule, setCurrentSchedule} from "../../redux/actions/scheduleActions";
+import {addRoutine, addExercises} from "../../redux/actions/routineActions";
+var uuid = require("uuid");
 
 /*************************** TESTING ******************************************/
 var schedulesArray = [];
@@ -16,7 +18,7 @@ const ScheduleStack = createStackNavigator();
 function ScheduleScreen() {
   return (
     <ScheduleStack.Navigator>
-        <ScheduleStack.Screen name="Schedules" component={ScheduleView} />
+        {/* <ScheduleStack.Screen name="Schedules" component={ScheduleView} /> */}
         <ScheduleStack.Screen name="Routines" component={routineView} />
         <ScheduleStack.Screen name="createRoutine" component={createRoutineView} />
     </ScheduleStack.Navigator>
@@ -32,6 +34,9 @@ const Item = ({ item, onPress, style }) => (
 const ScheduleView = ({ navigation }) => {
   const dispatch = useDispatch();
   const schedule = useSelector(state => state.schedule);
+  //current dish
+  // const currentSchedule = useSelector(state => state.currentSchedule);
+  
   // For testing purposes
 /*const clearStorageTest = () => {
     AsyncStorage.clear()
@@ -42,7 +47,11 @@ const ScheduleView = ({ navigation }) => {
     return setSchedules(schedule);
   }, [schedule])
 
-  const [currentSchedule, setCurrentSchedule] = useState(currentSchedule);
+  //current dish
+  /*const [currentSchedule, setCurrentSchedule] = useState(currentSchedule);
+  useEffect(() => {
+    return setCurrentSchedule(currentSchedule);
+  }, [currentSchedule])*/
 
   const createSchedule = (name) => {
     if(!name) console.log('error');
@@ -75,20 +84,26 @@ const ScheduleView = ({ navigation }) => {
     </View>
   );
 };
-
+ 
 const routineView = ({ route, navigation }) => {
-  const [routines, setRoutine] = useState([]);
-  //const {routine} = route.params;
-  const addRoutine = ({name, exercises}) => {
-    setRoutine([...routines, {title: name, exercises: exercises}]);
+  const dispatch = useDispatch();
+  const routine = useSelector(state => state.routines);
+  const [routines, setRoutine] = useState(routine);
+  useEffect(() => {
+    return setRoutine(routine);
+  }, [routine]);
+
+  const createRoutine = ({name, exercises}) => {
+    let routineID = uuid.v4().toString();
+    dispatch(addRoutine({id: routineID, title: name}));
+    dispatch(addExercises({id:routineID, exercises: exercises}));
   }
-  const {schedule} = route.params;
-  console.log(schedule);
+
   const renderItem = ({ item }) => {
     return (
       <Item
         item={item}
-        onPress={() => console.log("ja du" + schedule)}
+        onPress={() => alert("exercises for routine")}
       />
     );
   };
@@ -103,19 +118,43 @@ const routineView = ({ route, navigation }) => {
           />
         </SafeAreaView>
 
-        <Button title="create new routine" onPress={() => (navigation.navigate('createRoutine', {addRoutine: addRoutine}))}/>
+        <Button title="create new routine" onPress={() => (navigation.navigate('createRoutine', {addRoutine: createRoutine}))}/>
       </View>
     );
 };
 
 const createRoutineView = ({ route, navigation }) => {
   const [name, setName] = useState('');
-  //const {routine} = route.params;
   const [exercises, setExercise] = useState([]);
   const {addRoutine} = route.params;
   const addExercise = (name, sets, reps, weight) => {
     setExercise([...exercises, {name: name, sets: sets, reps: reps, weight: weight}]);
   }
+  const hasUnsavedChanges = Boolean(name || exercises?.length);
+  React.useEffect(() => navigation.addListener('beforeRemove', (e) => {
+    // If we don't have unsaved changes, then we don't need to do anything
+        if (!hasUnsavedChanges) return;
+        // Prevent default behavior of leaving the screen
+        e.preventDefault();
+
+        // Prompt the user before leaving the screen
+        Alert.alert(
+          'Discard changes?',
+          'You have unsaved changes. Are you sure to discard them and leave the screen?',
+          [
+            { text: "Don't leave", style: 'cancel', onPress: () => {} },
+            {
+              text: 'Discard',
+              style: 'destructive',
+              // If the user confirmed, then we dispatch the action we blocked earlier
+              // This will continue the action that had triggered the removal of the screen
+              onPress: () => navigation.dispatch(e.data.action),
+            },
+          ]
+        );
+      }),
+    [navigation, hasUnsavedChanges]
+  );
 
   return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -161,14 +200,14 @@ const CreateExerciseModal = ({addExercise}) => {
       <Modal style = {styles.centeredView} animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => { Alert.alert("Modal has been closed."); setModalVisible(!modalVisible);}}>
       <View style={styles.modalView}>
           <TextInput style={{height: 40, fontSize: 20}} placeholder="Exercise name" onChangeText={inp => setName(inp)} defaultValue={name}/>
-          <TextInput style={{height: 40, fontSize: 20}} placeholder="# of Sets" onChangeText={inp => setSets(inp)} defaultValue={sets}/>
-          <TextInput style={{height: 40, fontSize: 20}} placeholder="# of Reps" onChangeText={inp => setReps(inp)} defaultValue={reps}/>
-          <TextInput style={{height: 40, fontSize: 20}} placeholder="# of kg" onChangeText={inp => setWeight(inp)} defaultValue={weight}/>
+          <TextInput style={{height: 40, fontSize: 20}} placeholder="# of Sets" onChangeText={inp => setSets(inp)} defaultValue={sets} keyboardType="numeric"/>
+          <TextInput style={{height: 40, fontSize: 20}} placeholder="# of Reps" onChangeText={inp => setReps(inp)} defaultValue={reps} keyboardType="numeric"/>
+          <TextInput style={{height: 40, fontSize: 20}} placeholder="# of kg" onChangeText={inp => setWeight(inp)} defaultValue={weight} keyboardType="numeric"/>
         <Pressable style={[styles.button, styles.buttonClose]} onPress={() => {setModalVisible(!modalVisible); addExercise(name, sets, reps, weight)}}>
           <Text style= {{textAlign:'center', color:'white'}}>Add</Text>
         </Pressable>
       </View>
-      </Modal>
+      </Modal> 
       <Pressable style={[styles.button, styles.buttonOpen]} onPress={() => setModalVisible(true)}>
         <Text>Add Exercise</Text>
       </Pressable>
@@ -199,8 +238,9 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: '#f9c2ff',
     padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    marginVertical: 1,
+    marginHorizontal: 17,
+    borderRadius:8,
   },
   title: {
     fontSize: 32,

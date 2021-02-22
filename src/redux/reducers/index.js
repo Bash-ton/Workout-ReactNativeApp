@@ -7,6 +7,7 @@ import { setLoggedInState } from "./testReducer";
 import authReducers from "./authReducers";
 import scheduleReducers from "./scheduleReducers";
 import {workoutDAOReducer} from "./workoutDAOReducers";
+import {exerciseReducers, routineReducers} from "./routinesReducer";
 
 
 
@@ -15,7 +16,9 @@ const combinedReducers = combineReducers({
     auth: authReducers,
     firebase: firebaseReducer,
     schedule: scheduleReducers,
-    workoutReduced: workoutDAOReducer
+    workoutReduced: workoutDAOReducer,
+    routines: routineReducers,
+    exercise: exerciseReducers
 });
 
 export default combinedReducers;
