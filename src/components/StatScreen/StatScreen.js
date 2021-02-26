@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {View, Button, Text, StyleSheet, Dimensions, ScrollView, Picker} from 'react-native';
+import {View, Button, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import {Picker} from "@react-native-community/picker";
 import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -185,7 +186,7 @@ const statsView = ({ navigation }) => {
         getYAxisValues();
         getGraphValuesMapped();
     }, [JSON.stringify(statsState), JSON.stringify(yAxisVals), JSON.stringify(xAxisVals) , exerciseName, max])
-
+    let exerciseObject = [{val: "excersiseName1", label: "exercise 1"}, {val:"exerciseName2", label: "exercise 2"}];
 
     const [pickerVal, setPickerVal] = useState("ex1");
     return (
@@ -198,8 +199,10 @@ const statsView = ({ navigation }) => {
                             selectedValue={pickerVal}
                             onValueChange={(itemValue, itemIndex, itemLabel)=>{setPickerVal(itemValue) , setExName(itemValue)  }}
                         >
+
                             <Picker.Item label="exercise 1" value="excersiseName1"/>
-                            <Picker.Item label="exercise 2" value="exerciseName2" />
+                            <Picker.Item label="exercise 2" value="exerciseName2"/>
+
                         </Picker>
                     </ScrollView>
                 </View>
@@ -327,7 +330,7 @@ const statsView = ({ navigation }) => {
 
 
                         }}>
-                            {" "}Sun
+                            -{" "}Sun
                         </Text>
 
                         <Text style={{
@@ -341,7 +344,7 @@ const statsView = ({ navigation }) => {
                             paddingTop: (windowWidth / 7 - 16),
 
                         }}>
-                            {" "}Sat
+                            -{" "}Sat
                         </Text>
 
                         <Text style={{
@@ -352,7 +355,7 @@ const statsView = ({ navigation }) => {
                             position: "relative",
                             paddingTop: (windowWidth / 7 - 16),
                         }}>
-                            {" "}Fri
+                            -{" "}Fri
                         </Text>
 
                         <Text style={{
@@ -365,7 +368,7 @@ const statsView = ({ navigation }) => {
                         }}
 
                         >
-                            {" "}Thu
+                            -{" "}Thu
                         </Text>
 
                         <Text style={{
@@ -376,7 +379,7 @@ const statsView = ({ navigation }) => {
                             position: "relative",
                             paddingTop: (windowWidth / 7 - 16),
                         }}>
-                            {" "}Wed
+                            -{" "}Wed
                         </Text>
 
                         <Text style={{
@@ -387,7 +390,7 @@ const statsView = ({ navigation }) => {
                             position: "relative",
                             paddingTop: (windowWidth / 7 - 16),
                         }}>
-                            {" "}Tue
+                            -{" "}Tue
                         </Text>
 
                         <Text style={{
@@ -400,7 +403,7 @@ const statsView = ({ navigation }) => {
 
 
                         }}>
-                            {" "}Mon
+                            -{" "}Mon
                         </Text>
 
 
@@ -517,6 +520,7 @@ const statsView = ({ navigation }) => {
         </View>
     );
 };
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -545,12 +549,3 @@ const styles = StyleSheet.create({
 
 export default StatScreen;
 
-/*
-<Button
-                            onPress={() => {
-                                alert("drop down menu")
-                            }}
-                            title="Change exercise"
-                            color="green"
-                        />
- */
