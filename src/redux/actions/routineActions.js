@@ -5,7 +5,7 @@ export const addRoutine = ({id, title}) => {
         const userID = firebase.auth().currentUser.uid;
         const firestore = getFirestore();
         const routineID = uuid.v4().toString();
-        const routine = {id: routineID, title: title, userID: userID}
+        const routine = {id:id, title: title, userID: userID}
         console.log(routine);
         firestore.collection("Sessions").doc(id).set(routine).then(() => {
             console.log('Success');
