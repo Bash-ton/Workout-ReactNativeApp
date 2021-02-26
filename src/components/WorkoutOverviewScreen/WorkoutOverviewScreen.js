@@ -1,5 +1,17 @@
 import React, { useState } from "react";
-import {Pressable,Modal,TextInput,SafeAreaView,StatusBar,StyleSheet,View, Button, Text, TouchableOpacity} from 'react-native';
+import {
+  Pressable,
+  Modal,
+  TextInput,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  View,
+  Button,
+  Text,
+  TouchableOpacity,
+  AsyncStorage
+} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import CheckBox from '@react-native-community/checkbox';
 import {dispatch,useDispatch,useSelector} from "react-redux";
@@ -63,6 +75,7 @@ function WorkoutScreen() {
 }
 
 const workoutView = ({ navigation }) => {
+
   //const DATA1= useSelector(state=>state.schedule)
   //const dataExercises= useSelector(state=>state.workoutReduced.exercises)
 //console.log(DATA1)
@@ -70,6 +83,7 @@ const workoutView = ({ navigation }) => {
   const [dataExercisesUpdate, setDataExercisesUpdate] = useState({});
   const renderItem = ({ item }) => {
     return (
+
       <Item
         item={item}
         onPress={() => {navigation.navigate('exercise'),currentID=item.id }}/>//Här ska unik excercie bli fetch beroende på item.id press.

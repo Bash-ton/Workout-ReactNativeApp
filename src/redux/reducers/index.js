@@ -5,9 +5,14 @@ import { combineReducers } from 'redux'
 import { firebaseReducer } from "react-redux-firebase";
 import { setLoggedInState } from "./testReducer";
 import authReducers from "./authReducers";
+
 import scheduleReducers from "./scheduleReducers";
 import {workoutDAOReducer} from "./workoutDAOReducers";
 import {exerciseReducers, routineReducers} from "./routinesReducer";
+
+import StatsReducer from "./statsReducer";
+
+
 
 
 
@@ -18,7 +23,8 @@ const combinedReducers = combineReducers({
     schedule: scheduleReducers,
     workoutReduced: workoutDAOReducer,
     routines: routineReducers,
-    exercise: exerciseReducers
+    exercise: exerciseReducers,
+    statReducer: StatsReducer,
 });
 
 export default combinedReducers;
