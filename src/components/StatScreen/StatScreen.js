@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Button, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import {View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import {Picker} from "@react-native-community/picker";
 import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -10,10 +10,10 @@ import Svg, {G, Circle, Polyline} from "react-native-svg";
 import {useDispatch, useSelector} from "react-redux";
 import {readCurrentWeek} from "../../redux/actions/statsActions";
 
-import PickerItem from "react-native-web/dist/exports/Picker/PickerItem";
 //navigation
 const StatStack = createStackNavigator();
 
+//handles navbar routing to "stats page"
 function StatScreen() {
     return (
         <StatStack.Navigator>
@@ -24,93 +24,25 @@ function StatScreen() {
 
 
 /**
- * *** GLOBAL IDEAS ***
- *
- * <Line/> x1,y1: första x,y kordinaten
- * <Line/> x2,y2: andra x,y kordinaten
- *
- * To get first value at correct spot use same dimensions on Line and PolyLine
- *
- * To send values to PolyLine: format -> "x,y x,y x,y"
- *  X-values: week -> divide {windowWidth} by 7 (add padding here to fit label names)
- *            month -> divide {windowWidth} by 4 (add padding here to fit label names)
- *            year  -> divide {windowWidth} by 12 (add padding here to fit label names)
- *
- *  Y-values: Able resize (depending on largest value) ex max value will map to local height value inside graph (% of windowHeight)
- *
- *  parameters to statsView:
- *      current date
- *      value (y-axis)
- *      graph type (ie week/month)
- */
-
-/**
- * *** week graph ***
- *
- * week starts with values from DB through redux: {mon: 0, tue: 0, wed: 0, thu: 0, fri: 0, sat: 0, sun: 0}
+ * This component renders the statistics page. The data is collected from a database in real time and re-renders when new values are added/updated in the database.
+ * All values are then mapped to specific x/y-coordinates on the screen in accordance to screen size and max value.
+ * @param navigation used to route through the navbar in the app.
+ * @returns {JSX.Element} a graph and a info box showing this users max performance for each exercise.
  */
 const statsView = ({ navigation }) => {
 
-
-    //change to real reducer later
-    const pass = [
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            title: 'Pass 1',
-        },
-        {
-            id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-            title: 'Pass 2',
-        },
-        {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: 'Pass 3',
-        },
-        {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: 'Pass 4',
-        },
-        {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: 'Pass 5',
-        },
-        {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: 'Pass 6',
-        },
-        {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: 'Pass 7',
-        },
-    ];
-    const passNumbers = pass.length;
-
-
-
+    //constants
     const statsState = useSelector(state => state.statReducer.result)
-    const red = useSelector(state => state.statReducer.result)
-    console.log(statsState)
-    console.log("*******************************")
-    console.log(red)
-    console.log("*******************************")
-    console.log(red[1])
     const graphType = "week"
-    //const exerciseName = "excersiseName1";
     const [exerciseName, setExName] = useState("excersiseName1");
-    //const max = useSelector(state => state.statReducer.stats[8].currentLocalMax)
     let max = statsState[8].currentLocalMax
     const dispatch = useDispatch();
-//excersiseName1
-//exerciseName2
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
-
-    //graph height depending on screen size
     const graphHeight = (windowHeight / 4);
 
     //functions
-
-    //map x-values to x-coordinates
+    //render x-values for the graph depending on screen size
     const [xAxisVals, setXAxisVals] = useState({
         mon: 0,
         tue: windowWidth / 7,
@@ -120,6 +52,7 @@ const statsView = ({ navigation }) => {
         sat: (5 * windowWidth / 7),
         sun: (6 * windowWidth / 7)
     });
+    //draw graph showing one week of exercises
     const getXAxisValues = () => {
         switch (graphType) {
             case "week":
@@ -140,6 +73,7 @@ const statsView = ({ navigation }) => {
         }
     }
 
+    //map database values to values in graph depending on screen size
     const [yAxisVals, setYAxisVals] = useState({});
     const getYAxisValues = () => {
         switch (graphType) {
@@ -160,7 +94,7 @@ const statsView = ({ navigation }) => {
         }
     }
 
-    //get graph values
+    //get graph values from database for each day of the week
     const [graphValues, setGraphValues] = useState()
     const getGraphValuesMapped = () => {
         if (graphType === "week") {
@@ -169,35 +103,28 @@ const statsView = ({ navigation }) => {
         }
     }
 
-
-
     //lifecycle methods
     useEffect(() => {
         dispatch(readCurrentWeek(exerciseName));
-
         getXAxisValues();
         getYAxisValues();
         getGraphValuesMapped();
         max = statsState[8].currentLocalMax;
-
-
     }, [])
 
 
     useEffect(() => {
         dispatch(readCurrentWeek(exerciseName));
-
         max = statsState[8].currentLocalMax;
         getXAxisValues();
         getYAxisValues();
         getGraphValuesMapped();
     }, [JSON.stringify(statsState), JSON.stringify(yAxisVals), JSON.stringify(xAxisVals) , exerciseName, max])
-    let exerciseObject = [{val: "excersiseName1", label: "exercise 1"}, {val:"exerciseName2", label: "exercise 2"}];
+
 
     const [pickerVal, setPickerVal] = useState("ex1");
     return (
         <View class="graph">
-
             {statsState[1] ? <ScrollView keyboardShouldPersistTaps="always">
                 <View>
                     <ScrollView keyboardShouldPersistTaps="always">
@@ -323,32 +250,20 @@ const statsView = ({ navigation }) => {
                     <ScrollView keyboardShouldPersistTaps="always"
                                 contentContainerStyle={{transform: [{rotate: "90deg"}]}}
                     >
-
                         <Text style={{
-
-
                             width: windowWidth / 7,
                             height: windowWidth / 7,
-
-
                             position: "relative",
                             paddingTop: (windowWidth / 7 - 16),
-
-
                         }}>
                             -{" "}Sun
                         </Text>
 
                         <Text style={{
-
-
                             width: windowWidth / 7,
                             height: windowWidth / 7,
-
-
                             position: "relative",
                             paddingTop: (windowWidth / 7 - 16),
-
                         }}>
                             -{" "}Sat
                         </Text>
@@ -356,8 +271,6 @@ const statsView = ({ navigation }) => {
                         <Text style={{
                             width: windowWidth / 7,
                             height: windowWidth / 7,
-
-
                             position: "relative",
                             paddingTop: (windowWidth / 7 - 16),
                         }}>
@@ -367,21 +280,16 @@ const statsView = ({ navigation }) => {
                         <Text style={{
                             width: windowWidth / 7,
                             height: windowWidth / 7,
-
-
                             position: "relative",
                             paddingTop: (windowWidth / 7 - 16),
                         }}
-
                         >
                             -{" "}Thu
                         </Text>
 
                         <Text style={{
-                            width: windowWidth / 7,//50
+                            width: windowWidth / 7,
                             height: windowWidth / 7,
-
-
                             position: "relative",
                             paddingTop: (windowWidth / 7 - 16),
                         }}>
@@ -391,8 +299,6 @@ const statsView = ({ navigation }) => {
                         <Text style={{
                             width: windowWidth / 7,
                             height: windowWidth / 7,
-
-
                             position: "relative",
                             paddingTop: (windowWidth / 7 - 16),
                         }}>
@@ -402,17 +308,11 @@ const statsView = ({ navigation }) => {
                         <Text style={{
                             width: 50,
                             height: 50,
-
-
                             position: "relative",
                             paddingTop: (windowWidth / 7 - 16),
-
-
                         }}>
                             -{" "}Mon
                         </Text>
-
-
                     </ScrollView>
                 </View>
                 <View>
@@ -422,7 +322,6 @@ const statsView = ({ navigation }) => {
                         height: windowWidth * 0.7,
                         borderWidth: 3,
                         flexDirection: "row",
-
                     }}>
                         <Text
                         >
@@ -431,7 +330,6 @@ const statsView = ({ navigation }) => {
                         <View>
                             <ScrollView keyboardShouldPersistTaps="always"
                                         contentContainerStyle={{flexDirection: 'row'}}>
-
                                 <Text
                                     style={{marginRight: 15}}
                                 >
@@ -455,7 +353,6 @@ const statsView = ({ navigation }) => {
                         <View>
                             <ScrollView keyboardShouldPersistTaps="always"
                                         contentContainerStyle={{flexDirection: 'row'}}>
-
                                 <Text
                                     style={{marginRight: 15}}
                                 >
@@ -479,7 +376,6 @@ const statsView = ({ navigation }) => {
                         <View>
                             <ScrollView keyboardShouldPersistTaps="always"
                                         contentContainerStyle={{flexDirection: 'row'}}>
-
                                 <Text
                                     style={{marginRight: 15}}
                                 >
@@ -516,23 +412,18 @@ const statsView = ({ navigation }) => {
                                 </Text>
                             </ScrollView>
                         </View>
-
-
                     </ScrollView>
                 </View>
-
-
             </ScrollView> : <Text>"</Text>}
         </View>
     );
 };
 
+//constants for CSS styling
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-//graph height depending on screen size
-const graphHeight = (windowHeight / 4);
-
+//CSS styling
 const styles = StyleSheet.create({
 //contentContainerStyle={{flexDirection: 'row'}}
     mainContainer: {

@@ -14,8 +14,8 @@ const AuthenticationRouter = () => {
 
     return (
         <WorkoutStack.Navigator>
-            <WorkoutStack.Screen name="Sign up" component={SignUpPage} />
             <WorkoutStack.Screen name="Log in" component={LogInPage} />
+            <WorkoutStack.Screen name="Sign up" component={SignUpPage} />
         </WorkoutStack.Navigator>
     );
 }
