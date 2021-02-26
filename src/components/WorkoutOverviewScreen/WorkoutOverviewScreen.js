@@ -11,40 +11,7 @@ import { useEffect } from "react";
 
 
 const WorkoutStack = createStackNavigator();
-const data1 = 	[{title: 'Bench', id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba', reps:'14', weight: '80kg'},
-      {title: 'PullDown',reps:'14', id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63', weight: '80kg'},
-      {title: 'Squats',reps:'14', id: '58694a0f-3da1-471f-bd96-145571e29d72', weight: '80kg'}];
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'Pass 1',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Pass 2',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Pass 3',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Pass 4',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Pass 5',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Pass 6',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Pass 7',
-  },
-];
 let currentID = "";
 
 
@@ -62,10 +29,23 @@ function WorkoutScreen() {
   );
 }
 
+function getExercises1(id,dataExercises){
+   let result = dataExercises.filter(test=> test.id===id  );
+   console.log(result[0])
+    return result[0]
+
+}
+
 const workoutView = ({ navigation }) => {
   //const DATA1= useSelector(state=>state.schedule)
   //const dataExercises= useSelector(state=>state.workoutReduced.exercises)
 //console.log(DATA1)
+const routine = useSelector(state => state.routines);
+  const [routines, setRoutine] = useState(routine);
+  useEffect(() => {
+    return setRoutine(routine);
+  }, [routine]);
+
   const dispatch =useDispatch();
   const [dataExercisesUpdate, setDataExercisesUpdate] = useState({});
   const renderItem = ({ item }) => {
@@ -78,7 +58,7 @@ const workoutView = ({ navigation }) => {
     return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={DATA}
+        data={routines}
         renderItem={renderItem}
         keyExtractor={item => item.id}/>
     </SafeAreaView>
@@ -95,7 +75,9 @@ const exerciseView = () => {
   const dataExercises= useSelector(state=>state.workoutReduced.exercises);
   const dispatch =useDispatch();
   useEffect(()=>{ 
-    dispatch(getExercises("f63c99ca-1347-4bc8-a9f2-6483b8761c27"))
+ 
+    dispatch(getExercises(currentID))
+    
      }
   ,[]);
   const renderItem = ({ item }) => {
@@ -106,7 +88,7 @@ const exerciseView = () => {
       <CheckBox value={isSelected} style={{ transform: [{ scaleX: 3 }, { scaleY: 3}] }}/>
        </View>
       <Item item={item} //Här ska man hämta alla väden för varje pressed item.id.
-      onPress={() => {setModalVisible(true),setSets("73"),setReps(dataExercises[0].reps),setWeight("70")}}
+      onPress={() => {setModalVisible(true),setSets(getExercises1(item.id,dataExercises).sets),setReps(getExercises1(item.id,dataExercises).reps),setWeight(getExercises1(item.id,dataExercises).weight)}}
       styles={styles.item} />
        </ScrollView>
       </View>
