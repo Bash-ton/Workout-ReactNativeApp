@@ -77,6 +77,12 @@ const createRoutineView = ({ route, navigation }) => {
   const addExercise = (name, sets, reps, weight) => {
     setExercise([...exercises, {name: name, sets: sets, reps: reps, weight: weight}]);
   }
+
+  const removeExercise = (ex) => {
+    let newExercises = exercises.filter(e => e.name != ex.name || e.sets != ex.sets || e.reps != ex.reps || e.weight != ex.weight);
+    setExercise(newExercises);
+  }
+
   const hasUnsavedChanges = Boolean(name || exercises?.length);
   useEffect(() => navigation.addListener('beforeRemove', (e) => {
     // If we don't have unsaved changes, then we don't need to do anything
@@ -113,13 +119,15 @@ const createRoutineView = ({ route, navigation }) => {
             <DataTable.Title numeric>Sets</DataTable.Title>
             <DataTable.Title numeric>weight</DataTable.Title>
             <DataTable.Title numeric>Reps</DataTable.Title>
+            <DataTable.Title> </DataTable.Title>
           </DataTable.Header>
-          {exercises.map(ex => (
+          {exercises.map(ex => ( 
             <DataTable.Row>
               <DataTable.Cell>{ex.name}</DataTable.Cell>
               <DataTable.Cell numeric>{ex.sets}</DataTable.Cell>
               <DataTable.Cell numeric>{ex.weight}</DataTable.Cell>
               <DataTable.Cell numeric>{ex.reps}</DataTable.Cell>
+              <DataTable.Cell numeric><Button title= "X" onPress={() => removeExercise(ex)}/></DataTable.Cell>
             </DataTable.Row>
           ))} 
 
